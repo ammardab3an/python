@@ -94,6 +94,68 @@ def listsConcatenation(lst1, lst2):
     res.extend(lst2)
     return res
 
+def twoTeams(students):
+    return sum(students[::2]) - sum(students[1::2])
+    # x[startAt:endBefore:skip]
+
+def removeTasks(k, toDo):
+    del toDo[k - 1::k]
+    return toDo
+
+def printList(lst):
+    return 'This is your list: ' + str(lst)
+
+repeatChar = lambda ch, n: ch * n
+# lambda function
+
+def getPoints(ans, p):
+    questionPoints = lambda i,ans: i + 1 if ans else -p
+    # lambda i,ans: [-p,i+1][ans]
+    # lambda i,ans: [-p,i+1][ans==True]
+
+    res = 0
+    for i, ans in enumerate(ans):
+        res += questionPoints(i, ans)
+    return res
+
+def sortStudents(students):
+    students.sort(key= lambda c: c.split()[-1])
+    return students
+
+def isTestSolvable(ids, k):
+
+    digitSum = lambda x: sum( list(map(int, x)) if type(x) == str else list(map(int, str(x))) )
+            #  lambda x: sum([int(i) for i in str(x)])
+            #  lambda i : sum( [int(x) for x in list(str(i))] )
+
+    sm = 0
+    for questionId in ids:
+        sm += digitSum(questionId)
+    return sm % k == 0
+
+def createSpiralMatrix(n):
+    dirs = [(-1, 0), (0, -1), (1, 0), (0, 1)]
+    curDir = 0
+    curPos = (n - 1, n - 1)
+    ####################################
+    res = res = [[0]*n for _ in range(n)]
+    ####################################
+    for i in range(1, n * n + 1):
+        res[curPos[0]][curPos[1]] = i
+        nextPos = curPos[0] + dirs[curDir][0], curPos[1] + dirs[curDir][1]
+        if not (0 <= nextPos[0] < n and
+                0 <= nextPos[1] < n and
+                res[nextPos[0]][nextPos[1]] == 0):
+            curDir = (curDir + 1) % 4
+            nextPos = curPos[0] + dirs[curDir][0], curPos[1] + dirs[curDir][1]
+        curPos = nextPos
+
+    return res
+
+def constructShell(n):
+    return [[0]*x for x in range(n+1)][1:] + [[0]*x for x in range(n+1)][::-1][1:-1]
+        #  min(i,2*n-i) for i in range(1,2*n)
+
 
 
 print("2")
