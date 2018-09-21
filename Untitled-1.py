@@ -1,3 +1,4 @@
+import re
 
 print("1")
 def countBits(n):
@@ -40,6 +41,59 @@ def mexFunction(s, upperBound):
         return upperBound
 
     return found
+
+def fixMessage(message):
+    # message.lower()[0:1].upper() + message[1:].lower()  
+    return message.capitalize()
+       
+def catWalk(code):
+    return "".join([x + " " for x in code.split() if len(x) != 0])[:-1]
+
+def convertTabs(code, x):
+    return code.replace("\t"," "*x)
+
+def permutationCipher(password, key):
+    table = {i + 97 : ord(key[i]) for i in range(0, 26)}
+    return password.translate(table)
+
+print(permutationCipher("iamthebest","zabcdefghijklmnopqrstuvwxy"))
+
+def competitiveEating(t, width, precision):
+    return '{:^{}.{}f}'.format(t, width, precision) 
+    # '{:^{}}'.format('{0:.{1}f}'.format(t, precision),width)
+    # '{:^{}.{}f}'.format(t, width, precision) 
+    # "{0:.{1}f}".format(t,precision).center(width)
+    # ('{:^{w}.{p}f}').format(t,w=width,p=precision)
+
+def newStyleFormatting(s):
+    s = re.sub('%%', '{%}', s)
+    s = re.sub('%[dfFgeEGnnxXodcbs]', '{}', s)
+    return re.sub('{%}','%',s)
+    
+def _newStyleFormatting(s):
+    s = s.replace('%%', '{%}')
+
+    s = s.replace('%d', '{}')
+    s = s.replace('%f', '{}')
+    s = s.replace('%s', '{}')
+    s = s.replace('%g', '{}')
+    s = s.replace('%e', '{}')
+    s = s.replace('%x', '{}')
+    s = s.replace('%c', '{}')
+    s = s.replace('%o', '{}')
+
+    return s.replace('{%}','%')
+
+def getCommit(commit):
+    return commit.lstrip('chars')
+    # "".join(filter(lambda x: x not in "0?+!", commit))
+    # re.sub('[0?+!]', '', commit)
+
+def listsConcatenation(lst1, lst2):
+    res = lst1
+    res.extend(lst2)
+    return res
+
 
 
 print("2")
