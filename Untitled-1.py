@@ -156,6 +156,73 @@ def constructShell(n):
     return [[0]*x for x in range(n+1)][1:] + [[0]*x for x in range(n+1)][::-1][1:-1]
         #  min(i,2*n-i) for i in range(1,2*n)
 
+def wordPower(word):
+    num = dict([(ch,ord(ch)-96) for ch in word])
+        # {ch : ord(ch)-96 for ch in word}
+    return sum([num[ch] for ch in word])
+
+def coolPairs(a, b):
+    uniqueSums = {j+k for j in a for k in [i for i in b if (i*j) % (i+j) == 0]}
+   #uniqueSums = {x+y for x in a for y in b if (x*y)%(x+y) == 0}
+    return len(uniqueSums)
+
+def multiplicationTable(n):
+    return [[x*i for i in range(n+1)[1:]] for x in range(n+1)][1:]
+#   return [[x*y for x in range(1,n+1)] for y in range(1,n+1)]
+#   return [[(1+i)*(1+j) for i in range(n)] for j in range(n)]
+    
+def collegeCourses(x, courses):
+    def shouldConsider(course):
+        return len(course) != x
+
+    return list(courses[i] for i in range(len(courses)) if list(map(shouldConsider, courses))[i]) 
+   #return list(filter(shouldConsider, courses))
+
+def uniqueCharacters(document):
+    return list(sorted({c:ord(c) for c in document}))
+    #      sorted(set(document))
+
+def correctScholarships(bestStudents, scholarships, allStudents):
+    return set(bestStudents) <= set(scholarships) < set(allStudents)
+  # return True if len([i for i in set(scholarships)-set(bestStudents) if allStudents.__contains__(i)]) == len(set(scholarships)-set(bestStudents)) 
+  #         and len(allStudents)>len(scholarships) 
+  #         and len([i for i in bestStudents if not scholarships.__contains__(i)]) == 0 else False
+  
+def startupName(companies):
+    cmp1 = set(companies[0])
+    cmp2 = set(companies[1])
+    cmp3 = set(companies[2])
+    res =  [i for i in cmp1 | cmp2 | cmp3 if  int(cmp1.__contains__(i)) +  int(cmp2.__contains__(i)) +  int(cmp3.__contains__(i)) == 2 ]
+    #      (comp1 & comp2 | comp1 & comp3 | comp2 & comp3) - (comp1 & comp2 & comp3)
+    return list(sorted(list(res)))
+
+def wordsRecognition(word1, word2):
+    def getIdentifier(w1, w2):
+        #######
+        return "".join(sorted(set(w1) - set(w2)))
+        #######
+    return [getIdentifier(word1, word2), getIdentifier(word2, word1)]
+
+def transposeDictionary(scriptByExtension):
+    return sorted(zip(scriptByExtension.values(),scriptByExtension.keys()))
+
+from collections import deque
+
+def doodledPassword(digits):
+    n = len(digits)
+    res = [deque(digits) for _ in range(n)]
+    deque(map(lambda x,y: x.rotate(-y) ,res,range(n)), 0)
+    return [list(d) for d in res]
+
+# ps: map(fun(a,b,c), a, b, c)
+
+from collections import Counter
+
+def frequencyAnalysis(encryptedText):
+    return max(Counter(encryptedText).keys(),key = lambda x: Counter(encryptedText)[x])
+#   return Counter(encryptedText).most_common(1)[0][0]
+
+
 
 
 print("2")
