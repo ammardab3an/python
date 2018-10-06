@@ -222,8 +222,35 @@ def frequencyAnalysis(encryptedText):
     return max(Counter(encryptedText).keys(),key = lambda x: Counter(encryptedText)[x])
 #   return Counter(encryptedText).most_common(1)[0][0]
 
+from itertools import cycle
+
+def cyclicName(name, n):
+    gen = cycle(name)
+ #  gen = iter(''.join(list(repeat(name,n))).rjust(n))
+    res = [next(gen) for _ in range(n)]
+    return ''.join(res)
 
 
+from itertools import cycle# if you want explanation about this stupidness i'm just too lazy to to learn about itertools
+
+def memoryPills(pills):
+    gen = iter(pills[pills.index([i for i in pills if len(i) % 2 == 0][0]):] + ['','',''])
+    #     dropwhile(lambda s: len(s) % 2 != 0, pills + [""] * 3)
+    next(gen)
+    return [next(gen) for _ in range(3)]
+
+from itertools import count,takewhile
+
+def floatRange(start, stop, step):
+    gen = takewhile(lambda x: x<stop,count(start,step))
+    return list(gen)
+
+from itertools import permutations
+
+def rockPaperScissors(players):
+    return sorted([[i,j] for i in  players for j in list(set(players) - set([i]))])
+    #      sorted(permutations(players,2))
+
+a = ''.join([chr(int(i,2)) for i in ['01101000', '01100101', '01101100', '01101100', '01101111']])
 
 print("2")
-
