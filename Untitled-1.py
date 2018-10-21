@@ -253,4 +253,66 @@ def rockPaperScissors(players):
 
 a = ''.join([chr(int(i,2)) for i in ['01101000', '01100101', '01101100', '01101100', '01101111']])
 
+
+# sum to lists
+'''
+# first way
+[list1[i]+list2[i] for i in range(len(list1))]
+# second way
+map(sum, zip(list1,list2))
+# third way
+[u+v for u,v in zip(list1,list2)]
+# fourth way
+map(lambda x: x[0]+x[1], zip(list1, list2))
+'''
+
+# using star in map function
+def pressureGauges(morning, evening):
+    return [[min(i,j) for i,j in zip(morning,evening)],[max(i,j) for i,j in zip(morning,evening)]]
+# another way
+def _pressureGauges(morning, evening):
+    return [list(map(min, zip(morning, evening))), list(map(max, zip(morning, evening)))]
+#           zip(*map(sorted, zip(morning, evening)))
+#           zip(*[sorted(a) for a in zip(morning,evening)])
+
+def correctLineup(athletes):
+    return [athletes[i^1] for i in range(len(athletes))]
+
+# using xor 
+for i in range(10):
+    [j^i for j in range(10)]
+
+# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+# [1, 0, 3, 2, 5, 4, 7, 6, 9, 8]
+# [2, 3, 0, 1, 6, 7, 4, 5, 10, 11]
+# [3, 2, 1, 0, 7, 6, 5, 4, 11, 10]
+# [4, 5, 6, 7, 0, 1, 2, 3, 12, 13]
+# [5, 4, 7, 6, 1, 0, 3, 2, 13, 12]
+# [6, 7, 4, 5, 2, 3, 0, 1, 14, 15]
+# [7, 6, 5, 4, 3, 2, 1, 0, 15, 14]
+# [8, 9, 10, 11, 12, 13, 14, 15, 0, 1]
+# [9, 8, 11, 10, 13, 12, 15, 14, 1, 0]
+
+def groupDating(male, female):
+    return [[male[i] for i in range(len(male)) if male[i] != female[i]],[female[i] for i in range(len(male)) if male[i] != female[i]]]
+#           zip(*[[m, f] for (m, f) in zip(male, female) if m != f])
+
+def fixTree(tree):
+    return [' '*h + '*'*hh + ' '*h for t in tree for hh in [len(t.replace(' ',''))] for h in [int((len(t)-hh)/2)] ]
+#           [x.strip().center(len(x))for x in tree]
+
+def prefSum(a):
+    return [sum(a[:i]) for i in range(len(a)+1)[1:]]
+
+def mathPractice(numbers):
+    return reduce(lambda a,b: a+[a[-1]+b] if len(a) % 2 == 0 else a+[a[-1]*b],numbers,[1])[-1]#)
+
+
+def _mathPractice(numbers):
+    return reduce(lambda x, (i,y): x+y if i%2 else x*y, enumerate(numbers), 1)
+
+def fibonacciList(n):
+    return [[0] * x for x in reduce(lambda a,b: a+[a[b-1]+a[b-2]],list(range(n))[2:],[0,1])]
+
+
 print("2")
