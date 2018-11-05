@@ -311,8 +311,47 @@ def mathPractice(numbers):
 def _mathPractice(numbers):
     return reduce(lambda x, (i,y): x+y if i%2 else x*y, enumerate(numbers), 1)
 
+# fibonacci List
 def fibonacciList(n):
     return [[0] * x for x in reduce(lambda a,b: a+[a[b-1]+a[b-2]],list(range(n))[2:],[0,1])]
 
+# yield
+def calkinWilfSequence(number):
+    def fractions():
+        lis=[[1,1]]
+        yield lis[0]
+        while True:
+            l=[]
+            for x in lis:
+                s=sum(x)
+                a=[x[0],s]
+                b=[s,x[1]]
+                l += [a,b]
+                yield a
+                yield b
+            lis = l
+
+    gen = fractions()
+    res = 0
+    while next(gen) != number:
+        res += 1
+    return res
+
+# eval
+def tryFunctions(x, functions):
+    return [eval(i)(x) for i in functions]
+
+# compose
+def compose(f, g):
+    return lambda x: f(g(x))
+
+def compose(functions):
+    return lambda x: reduce(lambda i,j: j(i), [x] + list(functions)[::-1])
+    # reversed(list)
+
+def compose(functions):
+    return reduce(lambda f,g: lambda x:f(g(x)), functions)
+
+# decorators
 
 print("2")
